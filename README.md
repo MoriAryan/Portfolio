@@ -41,7 +41,7 @@ It highlights my experience as a **Computer Science undergraduate at SVNIT Surat
 
 ## 🌐 Portfolio Website
 
-![Portfolio Preview](assets/portfolio-preview.png)
+![Portfolio Preview](portfolio-preview.png)
 
 ---
 ## ⚡ Getting Started
