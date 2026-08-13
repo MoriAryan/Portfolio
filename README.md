@@ -1,4 +1,4 @@
-# 🌐 Portfolio Website
+# My Portfolio Website
 
 Personal developer portfolio showcasing my projects, skills, and work in software engineering and machine learning.
 
