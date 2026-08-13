@@ -3,7 +3,6 @@
 Personal developer portfolio showcasing my projects, skills, and work in software engineering and machine learning.
 
 🔗 **Live Website:** https://moriaryan.vercel.app
-
 ---
 
 ## 📌 About
