@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #08080a;
+  --foreground: #f1f5f9;
+  --accent: #e11d2a;
+  --accent-hover: #ff2a3b;
+  --accent-glow: rgba(225, 29, 42, 0.22);
+  --card-bg: rgba(14, 14, 19, 0.82);
+  --card-border: rgba(39, 39, 49, 0.7);
+  --card-border-hover: rgba(225, 29, 42, 0.55);
 }
 
 @theme inline {
@@ -12,51 +18,143 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Animated gradient text */
-.animated-gradient-text {
-  background-image: linear-gradient(90deg, #60a5fa, #a78bfa, #06b6d4, #60a5fa);
-  background-size: 200% 200%;
+/* Hide default OS cursor completely on fine pointer devices ONLY on the public portfolio */
+@media (pointer: fine) {
+  .portfolio-root,
+  .portfolio-root *,
+  .portfolio-root *::before,
+  .portfolio-root *::after {
+    cursor: none !important;
+  }
+}
+
+/* Ensure standard cursors everywhere in the admin portal */
+.admin-portal,
+.admin-portal * {
+  cursor: auto;
+}
+.admin-portal a,
+.admin-portal button,
+.admin-portal [role="button"],
+.admin-portal label,
+.admin-portal input[type="checkbox"] {
+  cursor: pointer !important;
+}
+.admin-portal input[type="text"],
+.admin-portal input[type="password"],
+.admin-portal input[type="number"],
+.admin-portal textarea {
+  cursor: text !important;
+}
+
+/* ================================================================= */
+/*  Obsidian & Tactical Crimson Design System                         */
+/* ================================================================= */
+
+/* Crimson gradient text */
+.crimson-gradient-text {
+  background-image: linear-gradient(135deg, #ffffff 0%, #cbd5e1 55%, #e11d2a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gradientShift 12s linear infinite;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.crimson-glow-text {
+  text-shadow: 0 0 25px rgba(225, 29, 42, 0.45);
 }
 
-/* Skill bar animation */
-.skill-bar {
-  height: 8px;
-  background: rgba(148,163,184,0.08);
-  border-radius: 8px;
-  overflow: hidden;
+/* Glass card effect with tactical border */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.skill-fill {
-  height: 100%;
-  background: linear-gradient(90deg,#60a5fa,#a78bfa);
-  transform-origin: left;
-  transform: scaleX(0);
-  animation: fillBar 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+
+.glass-card:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: 0 0 35px var(--accent-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
 }
-@keyframes fillBar {
-  to { transform: scaleX(1); }
+
+/* Subtle tactical grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Crimson ambient glow orb */
+.glow-orb-crimson {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.3;
+  pointer-events: none;
+  background: radial-gradient(circle, #e11d2a 0%, transparent 70%);
+}
+
+/* Timeline circuit line */
+.timeline-line {
+  background: linear-gradient(
+    180deg,
+    rgba(225, 29, 42, 0.8) 0%,
+    rgba(225, 29, 42, 0.35) 45%,
+    rgba(39, 39, 49, 0.4) 85%,
+    transparent 100%
+  );
+}
+
+/* Skill chip interaction */
+.skill-chip {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.skill-chip:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(225, 29, 42, 0.28);
+}
+.skill-chip-top {
+  background: linear-gradient(135deg, rgba(225, 29, 42, 0.12), rgba(255, 255, 255, 0.03));
+  border-color: rgba(225, 29, 42, 0.4);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(225, 29, 42, 0.35),
+    rgba(39, 39, 49, 0.6),
+    transparent
+  );
+}
+
+/* Featured project card cover overlay */
+.project-cover-overlay {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(8, 8, 10, 0.4) 40%,
+    rgba(8, 8, 10, 0.98) 100%
+  );
+}
+
+/* Research card glow */
+.research-glow {
+  box-shadow: 0 0 50px rgba(225, 29, 42, 0.06),
+    0 0 100px rgba(225, 29, 42, 0.03);
 }
 
 /* Nav link underline effect */
@@ -69,16 +167,38 @@ body {
   left: 50%;
   transform: translateX(-50%) scaleX(0);
   bottom: -6px;
-  width: 60%;
+  width: 70%;
   height: 2px;
-  background: linear-gradient(90deg,#60a5fa,#a78bfa);
+  background: linear-gradient(90deg, #e11d2a, #ff4d5a);
   border-radius: 2px;
-  transition: transform .28s ease;
+  transition: transform 0.25s ease;
 }
-.nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+.nav-link:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Subtle pulse for live status */
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 42, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(225, 29, 42, 0); }
+}
+.live-dot {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #08080a; }
+::-webkit-scrollbar-thumb { background: rgba(39, 39, 49, 0.8); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(225, 29, 42, 0.6); }
 
 /* =================================================================
-   Project Vault
+   Project Vault & Chaptered Modal Styles
    ================================================================= */
 
 .vault-card-img {
@@ -86,15 +206,14 @@ body {
   object-position: top center;
 }
 
-/* ---- Detail Sheet (bottom sheet) ---- */
-
+/* ---- Detail Sheet / Modal Backdrop ---- */
 .vault-sheet-backdrop {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(4, 4, 6, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .vault-sheet {
@@ -103,13 +222,13 @@ body {
   left: 0;
   right: 0;
   z-index: 100;
-  max-height: 85vh;
+  max-height: 88vh;
   overflow-y: auto;
-  background: #0f172a;
+  background: #0d0d12;
   border-top-left-radius: 1.25rem;
   border-top-right-radius: 1.25rem;
-  border-top: 1px solid rgba(71, 85, 105, 0.4);
-  box-shadow: 0 -10px 60px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(225, 29, 42, 0.35);
+  box-shadow: 0 -10px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(225, 29, 42, 0.15);
   touch-action: pan-y;
   overscroll-behavior: contain;
 }
@@ -117,12 +236,12 @@ body {
   .vault-sheet {
     left: 50%;
     transform: translateX(-50%);
-    max-width: 38rem;
+    max-width: 42rem;
     border-bottom-left-radius: 1.25rem;
     border-bottom-right-radius: 1.25rem;
     bottom: 2rem;
-    max-height: 80vh;
-    border: 1px solid rgba(71, 85, 105, 0.3);
+    max-height: 85vh;
+    border: 1px solid rgba(225, 29, 42, 0.35);
   }
 }
 
@@ -147,18 +266,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(71, 85, 105, 0.4);
+  background: rgba(13, 13, 18, 0.85);
+  border: 1px solid rgba(39, 39, 49, 0.8);
   color: #94a3b8;
   cursor: pointer;
-  transition: color 0.15s, background 0.15s;
+  transition: all 0.15s;
 }
 .vault-sheet-close:hover {
   color: #fff;
-  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(225, 29, 42, 0.6);
+  background: rgba(225, 29, 42, 0.2);
 }
 
 .vault-sheet-cover {
@@ -176,10 +296,10 @@ body {
 }
 
 .vault-sheet-body {
-  padding: 1.25rem 1.5rem 2rem;
+  padding: 1.5rem 1.75rem 2.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .vault-sheet-title {
@@ -207,14 +327,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: #4ade80;
+  color: #e11d2a;
 }
 
 .vault-status-dot {
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 9999px;
-  background: #4ade80;
+  background: #e11d2a;
   animation: pulse-dot 2s ease-in-out infinite;
 }
 @keyframes pulse-dot {
@@ -234,12 +354,11 @@ body {
   gap: 0.4rem;
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  font-weight: 500;
-  color: #93c5fd;
+  font-weight: 600;
+  color: #ff4d5a;
   transition: color 0.15s;
   text-decoration: none;
 }
 .vault-sheet-link:hover {
-  color: #60a5fa;
+  color: #ffffff;
 }
-

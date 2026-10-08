@@ -25,7 +25,7 @@ import { track } from "@/lib/track";
 /*  Types & Data                                                       */
 /* ------------------------------------------------------------------ */
 
-export interface Project {
+export interface VaultProject {
   id: string;
   slug: string;
   title: string;
@@ -37,7 +37,8 @@ export interface Project {
   image: string;
 }
 
-const PROJECTS: Project[] = [
+// Fallback data when no props are passed (used when DB is unavailable)
+const DEFAULT_PROJECTS: VaultProject[] = [
   {
     id: "p1",
     slug: "rabuste-coffee",
@@ -77,7 +78,8 @@ const PROJECTS: Project[] = [
 /*  Main Component                                                     */
 /* ------------------------------------------------------------------ */
 
-export default function ProjectVault() {
+export default function ProjectVault({ projects: propProjects }: { projects?: VaultProject[] }) {
+  const PROJECTS = propProjects && propProjects.length > 0 ? propProjects : DEFAULT_PROJECTS;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
   const [selectedId, setSelectedId] = useState<string | null>(null);
