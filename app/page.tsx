@@ -13,6 +13,7 @@ import {
   Cpu,
   Globe
 } from 'lucide-react';
+import ProjectVault from './components/ProjectVault';
 
 // --- INTERFACES (Fixes TypeScript Errors) ---
 
@@ -376,6 +377,9 @@ export default function Portfolio() {
           ))}
         </motion.div>
       </section>
+
+      {/* Project Vault Section */}
+      <ProjectVault />
 
       {/* Footer / Contact */}
       <footer id="contact" className="py-20 px-6 border-t border-slate-800 text-center">
